@@ -1,0 +1,43 @@
+<div class="container">
+  <h1 class="text-4xl font-bold text-center mb-8">Create a New Pokemon</h1>
+  <form #pokemonForm="ngForm" (ngSubmit)="onSubmit(pokemonForm)" class="max-w-lg mx-auto">
+    <div>
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        ngModel
+        required
+      >
+      <div *ngIf="pokemonForm.submitted && !pokemonForm.controls['name']?.valid" class="error">
+        Name is required.
+      </div>
+    </div>
+    <div>
+      <label for="imageUrl">Image URL:</label>
+      <input
+        type="url"
+        id="imageUrl"
+        name="imageUrl"
+        ngModel
+        required
+        pattern="https?://.+"
+      >
+      <div *ngIf="pokemonForm.submitted && pokemonForm.controls['imageUrl']?.errors?.['required']" class="error">
+        Image URL is required.
+      </div>
+      <div *ngIf="pokemonForm.submitted && pokemonForm.controls['imageUrl']?.errors?.['pattern']" class="error">
+        A valid Image URL is required.
+      </div>
+    </div>
+    <button type="submit" [disabled]="pokemonForm.invalid">Add Pokemon</button>
+  </form>
+</div>
+
+
+
+
+
+
+  
